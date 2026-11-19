@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Neon Coast Cover Studio</title>
+<meta name="description" content="Turn your own photo and a caption into multi-panel GTA-style cover art with a Vice City neon-sunset grade. Offline, in your browser, exported as PNG.">
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <div>
+      <h1>Neon Coast Cover Studio</h1>
+      <p>Your photo + a caption in, a multi-panel cover poster out.</p>
+    </div>
+  </div>
+  <div class="topbar-actions">
+    <button id="undoBtn" type="button">↩ Undo</button>
+    <button id="redoBtn" type="button">↪ Redo</button>
+    <label class="size-label">Size
+      <select id="sizeSelect">
+        <option value="1080x1080" selected>1080 × 1080 · square post</option>
+        <option value="1080x1350">1080 × 1350 · portrait post</option>
+        <option value="1920x1080">1920 × 1080 · landscape</option>
+      </select>
+    </label>
+    <button id="exportBtn" type="button" class="primary">Export PNG</button>
+  </div>
+</header>
+
+<main class="workspace">
+  <aside class="controls">
+    <section>
+      <h2>1 · Photos</h2>
+      <div id="dropZone" class="dropzone" role="button" tabindex="0" aria-label="Add photos">
+        <strong>Drop photos here</strong>
+        <span>or click to browse — they never leave your machine</span>
+      </div>
+      <input id="fileInput" type="file" accept="image/*" multiple hidden>
+      <div class="sample-row">
+        <span>No photo handy?</span>
+        <button id="samplePier" type="button">Try the pier sample</button>
+        <button id="sampleBlvd" type="button">Try the boulevard sample</button>
+      </div>
+      <div id="thumbs" class="thumbs" aria-label="Your photos"></div>
+      <fieldset class="fill-mode">
+        <legend>Fill the panels with</legend>
+        <label><input id="fillSpan" type="radio" name="fill" checked> One photo spanning every panel</label>
+        <label><input id="fillPanels" type="radio" name="fill"> A different photo per panel</label>
+      </fieldset>
+    </section>
+
+    <section>
+      <h2>2 · Layout</h2>
+      <div id="layoutGrid" class="layout-grid"></div>
+    </section>
+
+    <section>
+      <h2>3 · Panel framing</h2>
+      <div id="panelChips" class="chips"></div>
+      <label class="slider-label">Zoom
+        <input id="zoom" type="range" min="1" max="3" step="0.01" value="1">
+      </label>
+      <p class="hint">Drag on the cover to pan the photo inside its panel.</p>
+      <button id="resetPanelBtn" type="button">Reset this panel</button>
+    </section>
+
+    <section>
+      <h2>4 · Colour grade</h2>
+      <div id="gradeGrid" class="grade-grid"></div>
+    </section>
+
+    <section>
+      <h2>5 · Caption</h2>
+      <label class="text-label">Script accent
+        <input id="accent" type="text" maxlength="42" value="welcome to the" autocomplete="off">
+      </label>
+      <label class="text-label">Headline
+        <input id="headline" type="text" maxlength="42" value="NEON COAST" autocomplete="off">
+      </label>
+    </section>
+
+    <p id="status" class="status" role="status"></p>
+  </aside>
+
+  <section id="stage" class="stage" aria-label="Cover preview">
+    <canvas id="cover" width="1080" height="1080"></canvas>
+    <p class="stage-hint">Preview updates live — Export PNG renders this exact cover at full size.</p>
+  </section>
+</main>
+
+<footer class="footer">
+  <p>Neon Coast Cover Studio runs entirely offline in your browser. Lettering set in Anton and Pacifico (SIL Open Font License 1.1, bundled under <code>app/fonts/</code>). All artwork is original; no game logos, artwork or fonts are used.</p>
+</footer>
+
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
